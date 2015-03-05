@@ -27,6 +27,7 @@ def checkacc(username, password, **kwargs):
 	sess.post(url2, data=postparam, headers={"Referer": url}, cookies=cookies, verify=False, **kwargs)
 	try:
 		test = sess.cookies['webun']
-		return "Logged in"
+		return True
 	except Exception:
-		return 'Error'
+		return False
+		
