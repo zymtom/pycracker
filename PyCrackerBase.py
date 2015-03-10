@@ -11,14 +11,30 @@ def include(filename):
 
 class PyCracker:
 	def __init__(self):
+		#Required Settings
 		self.proxyMethod = ''
 		self.threadAmount = ''
 		self.crackingMethod = ''
+		#Dev Settings
+		self.debug = 0
+		#Cracking Settings
 		self.amountOfCombos = ''
 		self.list = ''
 		self.userWordlist = ''
 		self.passwordWordlist = ''
-		self.debug = 0
+		
+		
+		self.indexUsername = 0
+		self.indexPassword = 0
+		
+		self.focus = 1
+		
+		#Stats
+		self.success = ''
+		self.fail = ''
+		self.proxies = ''
+		self.start = ''
+		self.stop = ''
 	def is_number(n):
 		try:
 			int(n)
@@ -72,7 +88,10 @@ class PyCracker:
 			if getDebug():
 				print "No valid values. Lookup documentation or refer to the code."
 			return False
-		
+	def setWordlistFocus(focusValue): #Only for advanced users. Focus value 1 means all threads will focus on one username, focus value 0 means it will try each username in it's own thread.
+		self.focusValue = focusValue
+	def getWordlistFocus():
+		return focusValue
 	def setComboList(combolist):
 		try:
 			combolist = open(combolist, 'r')
@@ -109,7 +128,7 @@ class PyCracker:
 			if self.crackingMethod == 1:
 				threading.Thread(target=threadsCombo(self.amountOfCombos/self.threadAmount, x)).start()
 			elif self.crackingMethod == 2:
-				#Do something here
+				threading.Thread(target=threadsCombo).start()
 			elif self.crackingMethod == 3:
 				#Do something here
 			
@@ -124,5 +143,18 @@ class PyCracker:
 				if startindex-(combosForThread*multiplier) == combosForThread:
 					break
 	def threadsWordlist():
-		#Do something here
+		if getWordlistFocus() == 0:
+			#TODO: No focus
+		elif getWordlistFocus == 1:
+			while 1:
+				username = self.userWordlist[self.indexUsername]
+				password = self.passwordWordlist[self.indexPassword]
+				self.indexPassword = self.indexPassword+1
+				tryacc = checkacc(username, password)
+				if tryacc == True:
+					self.indexUsername = self.indexUsername+1
+				
+				
+		
+			
 			
