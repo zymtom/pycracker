@@ -8,5 +8,6 @@ def include(filename):
 include("PyCrackerBase.py")
 
 cracker = PyCracker()
+cracker.setDebug(1)
 cracker.setThreads(1)
 cracker.setConfig('/configs/origin.py')

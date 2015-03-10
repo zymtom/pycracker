@@ -104,23 +104,23 @@ class PyCracker:
 	
 	def start():
 		for x in range(self.threadAmount):
-			threading.Thread(target=threads(self.amountOfCombos/self.threadAmount, x)).start()
-			
-	def threads(combosForThread, multiplier):
-		startindex = combosForThread*multiplier
-		while 1:
 			if self.crackingMethod == 1:
+				threading.Thread(target=threadsCombo(self.amountOfCombos/self.threadAmount, x)).start()
+			elif self.crackingMethod == 2:
+				#Do something here
+			elif self.crackingMethod == 3:
+				#Do something here
+			
+	def threadsCombo(combosForThread, multiplier):
+		if self.crackingMethod == 1:
+			startindex = combosForThread*multiplier
+			while 1:
 				for i in range(combosForThread):
 					combo = self.list[startindex+i]
-					
 					checkacc(combo.split(":")[0], combo.split(":")[0])
-			elif self.crackingMethod == 2:
-				#TODO: Insert the wordlistcracking
-			elif self.crackingMethod == 3:
-				#TODO: INSERT THE BRUTEMETHOD
-			else:
-				if getDebug():
-					print "Error with the 'threads'-def. Consult the code or report this issue to the developer."
-				
-			startindex = startindex+1
+					startindex = startindex+1
+				if startindex-(combosForThread*multiplier) == combosForThread:
+					break
+	def threadsWordlist():
+		#Do something here
 			
