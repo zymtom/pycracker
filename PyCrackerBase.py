@@ -14,6 +14,7 @@ class PyCracker:
 		self.proxyMethod = ''
 		self.threadAmount = ''
 		self.crackingMethod = ''
+		self.amountOfCombos = ''
 		self.list = ''
 		self.userWordlist = ''
 		self.passwordWordlist = ''
@@ -76,6 +77,7 @@ class PyCracker:
 		try:
 			combolist = open(combolist, 'r')
 			self.list = combolist.readlines()
+			self.amountOfCombos = len(self.list)
 			return True
 		except Exception:
 			return False
